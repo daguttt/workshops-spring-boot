@@ -24,19 +24,19 @@ public class TasksController {
     public String showAllTasks(Model model) {
         var tasks = this.tasksService.findAll();
 
-        logger.warn(tasks.toString());
-        //logger.info(tasks.toString());
-
         model.addAttribute("tasks", tasks);
         return "tasks/list.html";
     }
+
     @GetMapping("/{id}")
-    public String showAllTasks(@PathVariable Long id, Model model) {
+    public String showTask(@PathVariable Long id, Model model) {
         var task = this.tasksService.findById(id);
         if(task.isPresent()){
             model.addAttribute("task", task.get());
             return "tasks/task";    //Se tiene que dejar la dirección de la vista
         }
+
+        model.addAttribute("taskId", id);
         return "tasks/empty";    //Se tiene que dejar la dirección de la vista
     }
 

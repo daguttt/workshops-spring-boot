@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
     <head>
         <title>Getting Started: Serving Web Content</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,6 +11,9 @@
                 <tr>
                     <th>
                         ID
+                    </th>
+                    <th>
+                        Titulo
                     </th>
                     <th>
                         Descripción
@@ -32,6 +35,7 @@
             <tbody>
                 <tr th:each="task : ${tasks}">
                     <td th:text="${task.id}"></td>
+                    <td th:text="${task.title}"></td>
                     <td th:text="${task.description}"></td>
                     <td th:text="${task.state}"></td>
                     <td th:text="${task.creationDate}"></td>
@@ -39,7 +43,7 @@
                     <td>
                         <ul>
                             <li>
-                                <a href="edit.html" th:href="@{http://localhost:8080/tasks/edit/{task.id}}">Editar</a>
+                                <a href="task.html" th:href="@{http://localhost:8080/tasks/{id}(id=${task.id})}">View</a>
                             </li>
                         </ul>
                     </td>

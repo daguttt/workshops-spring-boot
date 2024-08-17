@@ -57,6 +57,10 @@ public class Task {
         this.description = description;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public TaskState getState() {
         return state;
     }
@@ -87,7 +91,7 @@ public class Task {
                 "id= " + id + ",\n" +
                 "title= " + title + ",\n" +
                 "description= " + description + ",\n" +
-                "state= " + state + ",\n" +
+                "state= " + state.name() + ",\n" +
                 "creationDate= " + creationDate + ",\n" +
                 "creationTime= " + creationTime + ",\n" +
                 '}';
