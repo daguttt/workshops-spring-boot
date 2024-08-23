@@ -4,11 +4,10 @@ import com.riwi.todo_list_thymeleaf_jpa_mysql.entities.Task;
 import com.riwi.todo_list_thymeleaf_jpa_mysql.services.TasksService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/tasks")
@@ -40,5 +39,35 @@ public class TasksController {
         return "tasks/empty";    //Se tiene que dejar la dirección de la vista
     }
 
+    @GetMapping("/delete/{id}")
+    public String showDeletingTask(@PathVariable Long id, Model model) {
+        var task = this.tasksService.findById(id);
 
+        if (task.isEmpty()) {
+            model.addAttribute("taskId", id);
+            return "tasks/empty";
+        }
+
+        // Delete task
+        try {
+            this.tasksService.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            logger.warn(String.format("Error: Attempting to delete a task which doesn't exist. Error Message: %s", e.getMessage()));
+        }
+
+        model.addAttribute("task", task.get());
+        return "tasks/success_deleting";
+    }
+
+    @GetMapping("/create")
+    public String showCreateTask() {
+        return "tasks/create";
+    }
+
+    @PostMapping
+    public String createTask(@RequestBody Task task, Model model) {
+        var createdTask = this.tasksService.save(task);
+        model.addAttribute("task", createdTask);
+        return "tasks/task";
+    }
 }

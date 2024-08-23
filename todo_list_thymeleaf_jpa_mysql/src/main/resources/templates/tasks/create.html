@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear tarea</title>
+</head>
+<body>
+<h1>Crear nueva tarea</h1>
+<form th:action="@{/tasks}" th:object="${task}" method="POST">
+    <div>
+        <label for="title">Titulo:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" maxlength="150" required />
+    </div>
+    <div>
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" th:field="*{description}" maxlength="255" required></textarea>
+    </div>
+    <div>
+        <label for="state">State:</label>
+        <select id="state" name="state" th:field="*{state}" required>
+            <option th:each="state : ${T(com.example.TaskState).values()}"
+                    th:value="${state}" th:text="${state}">State</option>
+        </select>
+    </div>
+    <div>
+        <label for="creationDate">Creation Date:</label>
+        <input type="date" id="creationDate" name="creationDate" th:field="*{creationDate}" required />
+    </div>
+    <div>
+        <label for="creationTime">Creation Time:</label>
+        <input type="time" id="creationTime" name="creationTime" th:field="*{creationTime}" required />
+    </div>
+    <div>
+        <button type="submit">Create Task</button>
+    </div>
+</form>
+</body>
+</html>

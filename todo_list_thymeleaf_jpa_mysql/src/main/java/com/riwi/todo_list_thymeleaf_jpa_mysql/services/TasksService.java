@@ -18,8 +18,16 @@ public class TasksService {
     public List<Task> findAll() {
         return this.tasksRepository.findAll();
     }
+
     public Optional<Task> findById(Long id){
         return this.tasksRepository.findById(id);
     }
 
+    public void deleteById(Long id) {
+        this.tasksRepository.deleteById(id);
+    }
+
+    public Task save(Task baseTask) {
+        return this.tasksRepository.save(baseTask);
+    }
 }

@@ -6,6 +6,7 @@
     </head>
     <body>
         <h1>Tareas</h1>
+        <a href="create.html" th:href="@{/tasks/create}">Crear tarea</a>
         <table>
             <thead>
                 <tr>
@@ -44,6 +45,9 @@
                         <ul>
                             <li>
                                 <a href="task.html" th:href="@{http://localhost:8080/tasks/{id}(id=${task.id})}">View</a>
+                            </li>
+                            <li>
+                                <a th:href="@{http://localhost:8080/tasks/delete/{id}(id=${task.id})}">Eliminar</a>
                             </li>
                         </ul>
                     </td>

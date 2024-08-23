@@ -1,14 +1,15 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tarea no encontrada</title>
+    <title>¡Tarea eliminada!</title>
 </head>
 <body>
-    <h1 th:object="${taskId}" th:text="'Tarea con ID \'' + ${taskId} + '\' no encontrada'"></h1>
+    <h1 th:object="${task}" th:text="|Tarea con ID ${task.id} eliminada con éxito|"></h1>
     <a href="list.html" th:href="@{/tasks}">Volver a las tareas</a>
 </body>
 </html>
